@@ -22,6 +22,28 @@ class SignalMonitor @Inject constructor(
         return info.rssi
     }
 
+    fun isWifiEnabled(): Boolean {
+        return wifiManager.isWifiEnabled
+    }
+
+    fun getFrequency(): Int {
+        val info = wifiManager.connectionInfo
+        return info.frequency
+    }
+
+    fun getLinkSpeed(): Int {
+        val info = wifiManager.connectionInfo
+        return info.linkSpeed
+    }
+
+    fun getTotalRxBytes(): Long {
+        return android.net.TrafficStats.getTotalRxBytes()
+    }
+
+    fun getTotalTxBytes(): Long {
+        return android.net.TrafficStats.getTotalTxBytes()
+    }
+
     // Logic for "Significant Difference" (20% better)
     fun isSignificantlyBetter(newRssi: Int, currentRssi: Int, threshold: Int = 10): Boolean {
         return newRssi > (currentRssi + threshold)

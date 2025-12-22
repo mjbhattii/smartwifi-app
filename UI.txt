@@ -1,0 +1,142 @@
+App Flow Overview
+Onboarding (Permissions) → 2. Dashboard (Home) → 3. Network List (Management) → 4. Settings (Preferences)
+
+Screen 1: The "Permission Prime" (Onboarding)
+Since Android 10+ requires strict permissions for Wi-Fi scanning, this screen is critical. It must explain "Why" before asking.
+
+Visual: Clean, dark background with the App Logo pulsating in the center.
+
+Headline: "Take Control of Your Connection."
+
+Body Text: "To intelligently switch networks, SmartWifi needs permission to scan your location and manage your Wi-Fi connection."
+
+Action Buttons (Stacked):
+
+"Grant Location Access" (Status: Red 'X' → turns to Green Checkmark when done).
+
+"Grant Wi-Fi Control" (Status: Red 'X' → Green Checkmark).
+
+"Let's Go" (Appears only after permissions are granted).
+
+Screen 2: The "Command Center" (Home Screen)
+The main screen. It visualizes the "Triangle Logic" (Wi-Fi vs. Hotspot vs. Data).
+
+Header:
+
+Left: App Name "SmartWifi".
+
+Right: Master Toggle Switch (ON/OFF) – Turns the whole automation engine on or off.
+
+Center Visual (The Radar):
+
+A large circular "Radar" animation.
+
+Center Text: Shows the Current Network Name (e.g., "Office_Floor2").
+
+Sub-text: Real-time stats: "-55dBm | 5GHz".
+
+Visual Cues:
+
+Green Ring: Internet is Verified (Ping Success).
+
+Yellow Ring: Internet Unstable.
+
+Red Ring: No Internet (Searching...).
+
+The "Triangle" Status Bar (Below Radar):
+
+Three icons arranged horizontally. The active source is highlighted; others are dimmed.
+
+Icon 1: Router (Wi-Fi).
+
+Icon 2: Hotspot (Car/Travel).
+
+Icon 3: 4G/5G (Mobile Data).
+
+Quick Action Cards (Bottom Half):
+
+Gaming Mode: Toggle Button (Icon of a Gamepad). Text: "Pause scanning when gaming."
+
+Data Fallback: Toggle Button (Icon of 4G). Text: "Use Mobile Data if Wi-Fi fails."
+
+Network Speed: Shows current Link Speed (e.g., "Speed: 120Mbps").
+
+Screen 3: Network Manager (The Priority List)
+Where users manage their saved networks and set priorities.
+
+Tabs at Top: [Saved Networks] | [Blacklist] | [Probation]
+
+List View (Saved Networks Tab):
+
+Each row shows a saved SSID.
+
+Visual Indication: Signal Bars icon next to each name.
+
+Action: A "Star" icon next to each network.
+
+Gold Star: Priority 1 (VIP) – Always connect to this if available.
+
+Grey Star: Standard – Connect if signal is good.
+
+Long Press: Option to "Move to Blacklist" or "Ignore."
+
+Probation Tab (Crucial for Hotspots):
+
+Shows networks that are currently "Paused" because they had No Internet.
+
+Example Item: "Ali_iPhone (Paused for 01:30s)".
+
+Button: "Retry Now" (Manually force a re-check).
+
+Screen 4: Advanced Settings (The Brain)
+Where the user fine-tunes the algorithms.
+
+Section 1: Switching Sensitivity
+
+Slider: "Conservative" <--------> "Aggressive".
+
+Conservative: Holds onto Wi-Fi longer.
+
+Aggressive: Switches the moment a slightly better signal is found.
+
+Section 2: Mobile Data Logic
+
+Toggle: "Use Mobile Data assistance."
+
+Threshold: "Switch to data if Wi-Fi speed is below..." (User selects: 1Mbps, 5Mbps, etc.).
+
+Section 3: Gaming Mode Setup
+
+"Select Games": Opens a sub-screen list of all installed apps. User checks the boxes for apps (PUBG, Zoom, etc.) that should trigger "Do Not Disturb" mode.
+
+Section 4: Battery Saver
+
+Toggle: "Geofencing." (Only scan aggressively when at Home/Office locations).
+
+Screen 5: The "Heads Up" Notification (Foreground Service)
+Since the app runs in the background, this notification is always visible in the Android notification shade.
+
+Compact View:
+
+Left: SmartWifi Icon (Green dot if active).
+
+Text: "Auto-Switching Active."
+
+Sub-text: "Connected to: Office_Floor1 (-60dBm)".
+
+Action Buttons (on the notification itself):
+
+[Lock Network]: Stops scanning and locks the current Wi-Fi (useful if the user wants to stay put).
+
+[Gaming Mode]: Quick toggle to pause scans.
+
+Summary of Screens for AntiGravity Designers
+Splash/Permissions: Clean, trust-building, mandatory permission grants.
+
+Dashboard: Futuristic Radar visual, big clear status of which internet source is being used.
+
+Network List: List view with "Star" rating system for priorities.
+
+Settings: Sliders and toggles for algorithm fine-tuning.
+
+Notification: Persistent control bar for quick locking.

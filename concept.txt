@@ -1,0 +1,116 @@
+Product Concept: SmartWifi
+The "World-Class" Intelligent Network Manager
+
+1. Executive Summary
+SmartWifi is an intelligent background utility that solves the "Sticky Client" problem (where phones cling to weak Wi-Fi signals). Unlike standard Android behavior, SmartWifi prioritizes Internet Quality over just Signal Strength.
+
+It operates on a "Triangular Switching" philosophy, constantly evaluating three sources:
+
+Fixed Wi-Fi (Home/Office Routers)
+
+Mobile Hotspots (MiFi/Travel)
+
+Own Mobile Data (4G/5G Fallback)
+
+2. The Core Intelligence (The "Brain")
+The app must not react blindly. It must make decisions based on three factors:
+
+Signal Strength (RSSI): Is the connection strong enough to hold?
+
+Internet "Liveness": Does this connection actually have internet access? (Crucial for hotspots).
+
+User Context: Is the user gaming? Traveling? At home?
+
+The "Smart Decision" Logic
+Standard phones only look at signal bars. SmartWifi looks at throughput.
+
+Scenario: You are connected to a router with full bars, but the internet cable is unplugged.
+
+SmartWifi Behavior: It detects "No Internet" instantly and switches you to a backup network or your own data, even though the Wi-Fi signal is strong.
+
+3. Detailed Logic by Scenario
+Scenario A: Stationary Mode (Home & Office)
+Solving the "Sticky Client" Issue
+
+In a large office or home with multiple routers (Mesh setup), phones often stick to the first router they connected to, even when you walk to a different room with a better router.
+
+The "Better Network" Threshold: The app scans for other saved networks. If it finds a network that is significantly stronger (e.g., 20% better) than the current one, it initiates a switch.
+
+Anti-Flapping (Stability Check): To prevent the phone from disconnecting and reconnecting rapidly between two routers of similar strength, the app waits for a "Stability Period" (e.g., 10 seconds) before switching. The new signal must be consistently better, not just better for one second.
+
+5GHz Priority: If a 2.4GHz and a 5GHz network are available with similar strength, the app always chooses 5GHz for faster speed.
+
+Scenario B: Travel Mode (The Moving Hotspot)
+Handling Wi-Fi signals that fluctuate in quality
+
+This is the most complex feature. When traveling (e.g., in a car with a MiFi device), the Hotspot might have a strong Wi-Fi signal, but the Hotspot itself might lose Cellular coverage.
+
+The "Zombie" Detection: The app constantly checks if the Hotspot has actual internet. If the internet dies (but Wi-Fi stays connected), the app marks this Hotspot as a "Zombie."
+
+The "Probation" System (Crucial):
+
+Standard App: Would block this network and never try it again.
+
+SmartWifi: Puts this Hotspot on a "2-Minute Probation."
+
+Behavior: The app disconnects from the Zombie Hotspot. However, because it's a moving vehicle, coverage might return. After 2 minutes, the app silently re-checks the Hotspot. If the internet is back, it allows the phone to reconnect.
+
+Why this is World Class: It ensures you don't permanently lose access to your travel Wi-Fi just because of a momentary dead zone.
+
+Scenario C: The Safety Net (Own Mobile Data)
+When all Wi-Fi fails
+
+Data Fallback Logic: If the app detects that all available Wi-Fi networks are either weak or have no internet, it triggers the Data Fallback.
+
+Action: It temporarily disables the Wi-Fi radio. This forces the Android phone to use its own Sim Card (4G/5G) immediately.
+
+Recovery: While on Mobile Data, the app continues to scan quietly in the background. As soon as a "Healthy" Wi-Fi network (with verified internet) is found, it turns Wi-Fi back on and reconnects.
+
+4. "World Class" User Experience Features
+1. Gaming & Streaming Mode (No Lag)
+Scanning for Wi-Fi networks consumes system resources and causes "Lag Spikes" (high ping).
+
+Feature: The app detects when the user opens specific apps (PUBG, Netflix, Zoom, Teams).
+
+Behavior: It enters "Do Not Disturb" mode. It stops all background scanning and searching. It locks onto the current network to ensure the connection is 100% stable for gaming. It will only disconnect if the signal completely dies.
+
+2. Smart Battery Management
+Geofencing: The app learns where "Home" and "Office" are.
+
+Inside these zones: It scans frequently to ensure the best speed.
+
+Outside these zones: It scans less frequently to save battery.
+
+Motion Detection: If the phone is sitting still on a table (accelerometer is 0), the app reduces scanning speed (e.g., checks every 5 minutes instead of every 30 seconds).
+
+3. User "Blacklist" & "Whitelist"
+Blacklist: Users can mark specific open networks (like a neighbor’s printer or a slow public Wi-Fi) to never auto-connect.
+
+Whitelist (VIP): Users can mark their primary networks as "VIP." If a VIP network is seen, the app drops everything else to connect to it immediately.
+
+5. Summary for the AntiGravity Team
+To the Developers: The client requires an app that manages the WifiManager and ConnectivityManager APIs to create a state-machine.
+
+The State Machine Requirements:
+
+Monitor State: Constantly watch RSSI (Signal) and Internet Capability (Ping/DNS).
+
+Evaluate State: Compare Current Network vs. Available Networks vs. Mobile Data.
+
+Action State:
+
+If Current is Bad & New is Good: Switch.
+
+If Current is Bad & New is Bad: Switch to Mobile Data.
+
+If Current is Good but User is Gaming: Pause Logic.
+
+If Hotspot has No Internet: Pause it for X minutes, then retry (Do not ban).
+
+Success Metrics:
+
+The user should never have to manually open Wi-Fi settings to switch networks.
+
+The user should never be stuck on a Wi-Fi icon that says "Connected, No Internet."
+
+The user's game should never lag because the app decided to scan for Wi-Fi in the background.
